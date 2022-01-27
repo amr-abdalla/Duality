@@ -1,6 +1,8 @@
+using UnityEngine;
+using UnityEngine.AI;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -12,42 +14,78 @@ public class EnemyAI : MonoBehaviour
 
     private EnemyAI.state currentState = EnemyAI.state.TargetPlayer;
 
-    [SerializeField]
-    private Transform playerTransform;
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private float MovementAdjustmentRate = 0.5f;
+    [SerializeField] private float maxDelayTime = 0.3f;
+    [SerializeField] private float minDelayTime = 0.1f;
 
-    [SerializeField]
-    private float MovementAdjustmentRate = 0.5f;
+    private NavMeshAgent agent;
+    private float nextActionStartTime;
+    private IEnumerable<TreeController> trees;
+
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        nextActionStartTime = Time.time;
+        trees = FindObjectsOfType<TreeController>();
+    }
 
     private void Update()
     {
-        if(currentState == EnemyAI.state.TargetPlayer)
+        if(nextActionStartTime >= Time.time)
+        {
+            return;
+        }
+
+        nextActionStartTime = Time.time + Random.Range(minDelayTime, maxDelayTime);
+
+        if (currentState == EnemyAI.state.TargetPlayer)
         {
             ShootPlayer();
         }
         else
         {
-            SaveTree();
+            SaveTree(trees.First(tree => tree.state == "burning").gameObject);
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if(trees.Any(tree => tree.state == "burning"))
+        {
+            currentState = EnemyAI.state.SaveTree;
+        }
+        else
+        {
+            currentState = EnemyAI.state.TargetPlayer;
         }
     }
 
     void ShootPlayer()
     {
-        float y = playerTransform.position.x - transform.position.x;
+        float distanceToPlayer = playerTransform.position.x - transform.position.x;
 
-        if (y.FloatInRange(-MovementAdjustmentRate,MovementAdjustmentRate))
+        if (distanceToPlayer.FloatInRange(-MovementAdjustmentRate, MovementAdjustmentRate))
         {
-            Debug.Log("TRUE");
-            return;
+            Debug.Log("Shoot");
         }
         else
         {
-            Debug.Log("False");
+            agent.destination = new Vector3(playerTransform.position.x, transform.position.y, transform.position.z);
         }
     }
 
-    void SaveTree()
+    void SaveTree(GameObject tree)
     {
-
+        if(tree.transform.position.x != transform.position.x)
+        {
+            agent.destination = new Vector3(tree.transform.position.x, transform.position.y, transform.position.z);
+        }
+        else
+        {
+            Debug.Log("Shoot Tree");
+        }
     }
 }
 
