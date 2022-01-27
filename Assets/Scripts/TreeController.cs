@@ -3,40 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-public class TreeHealth : MonoBehaviour
+public class TreeController : MonoBehaviour
 {
-    Slider slider;
-    public bool hit;
+    public Slider slider;
+    public string state; 
     public float rate = 0.1f;
     // Start is called before the first frame update
     void Start()
     {
-        slider = GetComponent<Slider>();
+        state = "well";
         slider.value = slider.maxValue;
-        hit = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (hit)
+        if(slider.value <= slider.minValue)
         {
-            if(slider.value != slider.minValue)
+            state = "dead";
+        }
+        else if (state == "burning")
+        {
+            if (slider.value != slider.minValue)
             {
                 slider.value -= rate * Time.deltaTime;
             }
         }
     }
 
+
     public void Burn()
     {
-        hit = true;
+        state = "burning";
     }
 
     public void StopBurn()
     {
-        hit = false;
+        if(state != "dead")
+        {
+            state = "fire extinguished";
+        }
     }
-
 }
