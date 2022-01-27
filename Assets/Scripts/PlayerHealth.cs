@@ -14,14 +14,8 @@ public class PlayerHealth : MonoBehaviour
         slider.value = slider.maxValue;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void hit()
     {
-        slider.value -= rate * Time.deltaTime;
+        slider.value -= rate;
     }
 }
