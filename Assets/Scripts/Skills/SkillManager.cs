@@ -16,12 +16,9 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void TryInvokeSkill(int index)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TryInvokeSkill(skillCopies[0]);
-        }
+        TryInvokeSkill(skillCopies[0]);
     }
 
     private void TryInvokeSkill(Skill skill)
@@ -29,7 +26,7 @@ public class SkillManager : MonoBehaviour
         if (skill.CanBeInvoked())
         {
             skill.ConsumeSkill();
-            SkillFunctions.InvokeSkill(skill.name);
+            SkillFunctions.InvokeSkill(skill.name, gameObject);
         }
         else
         {

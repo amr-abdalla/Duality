@@ -19,6 +19,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float maxDelayTime = 0.3f;
     [SerializeField] private float minDelayTime = 0.1f;
 
+    private SkillManager skillManager;
     private NavMeshAgent agent;
     private float nextActionStartTime;
     private IEnumerable<TreeController> trees;
@@ -26,6 +27,7 @@ public class EnemyAI : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        skillManager = GetComponent<SkillManager>();
         agent.updateRotation = false;
         nextActionStartTime = Time.time;
         trees = FindObjectsOfType<TreeController>();
@@ -68,7 +70,7 @@ public class EnemyAI : MonoBehaviour
 
         if (distanceToPlayer.FloatInRange(-MovementAdjustmentRate, MovementAdjustmentRate))
         {
-           // Debug.Log("Shoot");
+            skillManager.TryInvokeSkill(0);
         }
         else
         {
@@ -84,7 +86,7 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-           // Debug.Log("Shoot Tree");
+            skillManager.TryInvokeSkill(0);
         }
     }
 }

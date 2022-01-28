@@ -5,21 +5,37 @@ using UnityEngine;
 public static class SkillFunctions 
 {
 
-    public static Dictionary<string, System.Action> skillActions = new Dictionary<string, System.Action>();
+    public static Dictionary<string, System.Action<GameObject>> skillActions = new Dictionary<string, System.Action<GameObject>>();
 
     static SkillFunctions()
     {
         skillActions.Add("NormalFire", NormalFire);
+        skillActions.Add("NormalWater", NormalWater);
     }
 
-    public static void InvokeSkill(string skillName)
+    public static void InvokeSkill(string skillName, GameObject instigator)
     {
-        skillActions[skillName].Invoke();
+        skillActions[skillName].Invoke(instigator);
     }
 
-    private static void NormalFire()
+    private static void NormalFire(GameObject instigator)
     {
-        Debug.Log("Shoot Fire Projectile");
+        var projectile = Resources.Load<GameObject>("FireProjectile");
+        projectile.transform.position = instigator.transform.position + new Vector3(0, instigator.transform.lossyScale.y/2, instigator.transform.lossyScale.z/2) ;
+
+        projectile.transform.forward = instigator.transform.forward;
+
+        Object.Instantiate(projectile);
+    }
+
+    private static void NormalWater(GameObject instigator)
+    {
+        var projectile = Resources.Load<GameObject>("WaterProjectile");
+        projectile.transform.position = instigator.transform.position + new Vector3(0, instigator.transform.lossyScale.y / 2, instigator.transform.lossyScale.z / 2);
+
+        projectile.transform.forward = instigator.transform.forward;
+
+        Object.Instantiate(projectile);
     }
 
 }

@@ -51,6 +51,19 @@ public class TreeController : MonoBehaviour
                 advance_form.SetActive(true);
             }
         }
+        else if (state == "well")
+        {
+            if (slider.value > 0.5)
+            {
+                well_form.SetActive(true);
+                start_burning.SetActive(false);
+            }
+            else
+            {
+                start_burning.SetActive(false);
+                advance_form.SetActive(true);
+            }
+        }
     }
 
 

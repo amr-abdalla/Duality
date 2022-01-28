@@ -111,4 +111,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: fire
   speed: 5
-  maxDistance: 20
+  maxDistance: 15
