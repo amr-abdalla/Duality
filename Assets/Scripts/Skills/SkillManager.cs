@@ -28,9 +28,5 @@ public class SkillManager : MonoBehaviour
             skill.ConsumeSkill();
             SkillFunctions.InvokeSkill(skill.name, gameObject);
         }
-        else
-        {
-            Debug.Log("Skill on cooldown");
-        }
     }
 }

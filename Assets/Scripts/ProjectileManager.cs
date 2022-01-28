@@ -39,8 +39,9 @@ public class ProjectileManager : MonoBehaviour
 
             case "water":
                 {
-                    if (other.gameObject.TryGetComponent(out PlayerHealth playerHealth))
+                    if (other.gameObject.name == "Player")
                     {
+                        PlayerHealth playerHealth = GameObject.Find("PlayerHealthBar").GetComponent<PlayerHealth>();
                         playerHealth.hit();
                         Destroy(gameObject);
                     }
