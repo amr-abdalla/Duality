@@ -68,7 +68,7 @@ public class EnemyAI : MonoBehaviour
 
         if (distanceToPlayer.FloatInRange(-MovementAdjustmentRate, MovementAdjustmentRate))
         {
-            Debug.Log("Shoot");
+           // Debug.Log("Shoot");
         }
         else
         {
@@ -84,7 +84,7 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            Debug.Log("Shoot Tree");
+           // Debug.Log("Shoot Tree");
         }
     }
 }

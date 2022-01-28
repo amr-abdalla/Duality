@@ -7,18 +7,18 @@ public class Skill : ScriptableObject
     public float coolDown = 0;
     public uint totalCharges = 1;
 
-    [HideInInspector]
-    public float lastUsedTime;
+    private float lastUsedTime;
+    private uint availableCharges;
 
-    [HideInInspector]
-    public uint availableCharges;
-
-    private void Awake()
+    public void init(Skill skill)
     {
-        availableCharges = totalCharges;
-        lastUsedTime = -coolDown;
-    }
+        this.name = skill.name;
+        this.coolDown = skill.coolDown;
+        this.totalCharges = skill.totalCharges;
 
+        this.availableCharges = this.totalCharges;
+        this.lastUsedTime = -this.coolDown;
+    }
 
     public bool CanBeInvoked()
     {
@@ -41,4 +41,5 @@ public class Skill : ScriptableObject
         availableCharges = totalCharges;
         lastUsedTime = Time.time;
     }
+
 }
