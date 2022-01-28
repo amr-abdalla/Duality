@@ -48,7 +48,7 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            SaveTree(trees.First(tree => tree.state == "burning")?.gameObject);
+            SaveTree(trees.FirstOrDefault(tree => tree.state == "burning").gameObject);
         }
     }
 
