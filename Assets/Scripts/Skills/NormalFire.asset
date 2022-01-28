@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed0c21ecc94cf2a489b7591f83318f19, type: 3}
   m_Name: NormalFire
   m_EditorClassIdentifier: 
-  name: 
-  coolDown: 0
-  totalCharges: 1
-  lastUsedTime: -0
-  availableCharges: 1
+  name: NormalFire
+  coolDown: 2
+  totalCharges: 3
