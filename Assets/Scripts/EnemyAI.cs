@@ -80,6 +80,11 @@ public class EnemyAI : MonoBehaviour
 
     void SaveTree(GameObject tree)
     {
+        if(!tree)
+        {
+            return;
+        }
+
         if(tree.transform.position.x != transform.position.x)
         {
             agent.destination = new Vector3(tree.transform.position.x, transform.position.y, transform.position.z);
