@@ -1,25 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileManager : MonoBehaviour
 {
+    public string type;
     public float speed = 0.1f;
     private Vector3 original;
     public float maxDistance = 20;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         original = transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void FixedUpdate()
     {
         transform.position = transform.position + transform.forward * speed * Time.deltaTime;
         if (Vector3.Distance(original, transform.position) > 20)
         {
             Destroy(gameObject);
+        }
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        switch (type)
+        {
+            case "fire":
+                {
+                    if (other.gameObject.TryGetComponent(out TreeController treeController))
+                    {
+                        treeController.state = "burning";
+                        Destroy(gameObject);
+                    }
+                }
+                break;
+
+            case "water":
+                {
+                    if (other.gameObject.TryGetComponent(out PlayerHealth playerHealth))
+                    {
+                        playerHealth.hit();
+                        Destroy(gameObject);
+                    }
+
+                    if (other.gameObject.TryGetComponent(out TreeController treeController))
+                    {
+                        treeController.state = "well";
+                        Destroy(gameObject);
+                    }
+                }
+                break;
         }
 
     }
