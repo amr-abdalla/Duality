@@ -20,7 +20,7 @@ public static class SkillFunctions
 
     private static void NormalFire(GameObject instigator)
     {
-        var projectile = Resources.Load<GameObject>("FireProjectile");
+        var projectile = Resources.Load<GameObject>("RedProjectile");
         projectile.transform.position = instigator.transform.position + new Vector3(0, instigator.transform.lossyScale.y/2, instigator.transform.lossyScale.z/2) ;
 
         projectile.transform.forward = instigator.transform.forward;
@@ -30,7 +30,7 @@ public static class SkillFunctions
 
     private static void NormalWater(GameObject instigator)
     {
-        var projectile = Resources.Load<GameObject>("WaterProjectile");
+        var projectile = Resources.Load<GameObject>("BlueProjectile");
         projectile.transform.position = instigator.transform.position + new Vector3(0, instigator.transform.lossyScale.y / 2, instigator.transform.lossyScale.z / 2);
 
         projectile.transform.forward = instigator.transform.forward;
