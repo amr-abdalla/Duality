@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1674863525515681207}
   - component: {fileID: 8526817320895049009}
   - component: {fileID: 4701727695385914008}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 8279297054151313393}
   - component: {fileID: 3142036533400943130}
   - component: {fileID: 2978884629694683677}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tree Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 7734221909601481676}
   - component: {fileID: 6932163843840198224}
   - component: {fileID: 7799664612522934140}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1988112870288742623}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7404359055590096355}
   - component: {fileID: 4901301396856920666}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: TreeHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,7 +390,8 @@ GameObject:
   - component: {fileID: 2078453747219335319}
   - component: {fileID: 6824500228663595357}
   - component: {fileID: 1751299973375584373}
-  m_Layer: 0
+  - component: {fileID: 8875048057603476706}
+  m_Layer: 6
   m_Name: Blue Box
   m_TagString: blueBox
   m_Icon: {fileID: 0}
@@ -506,6 +507,18 @@ MonoBehaviour:
   slider: {fileID: 4901301396856920666}
   state: 
   rate: 0.1
+--- !u!114 &8875048057603476706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7684734497911565054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d0ee26bf1e41b47afdc22bbff252bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8909043723068622194
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,7 +528,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7070334972780172754}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
