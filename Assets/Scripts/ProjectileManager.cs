@@ -16,7 +16,7 @@ public class ProjectileManager : MonoBehaviour
     private void FixedUpdate()
     {
         transform.position = transform.position + transform.forward * speed * Time.deltaTime;
-        if (Vector3.Distance(original, transform.position) > 20)
+        if (Vector3.Distance(original, transform.position) > maxDistance)
         {
             Destroy(gameObject);
         }
@@ -25,30 +25,35 @@ public class ProjectileManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        switch (type)
+        switch (gameObject.tag)
         {
-            case "fire":
+            case "red":
                 {
-                    if (other.gameObject.TryGetComponent(out TreeController treeController))
+                    if (other.gameObject.tag == "blueBox")
                     {
-                        treeController.state = "burning";
+                        other.GetComponent<BoxController>().hit();
+                        Destroy(gameObject);
+                    }
+                    if (other.gameObject.tag == "Enemy")
+                    {
+                        // Decrease enemy health
                         Destroy(gameObject);
                     }
                 }
                 break;
 
-            case "water":
+            case "blue":
                 {
-                    if (other.gameObject.name == "Player")
+                    if (other.gameObject.tag == "Player")
                     {
                         PlayerHealth playerHealth = GameObject.Find("PlayerHealthBar").GetComponent<PlayerHealth>();
                         playerHealth.hit();
                         Destroy(gameObject);
                     }
 
-                    if (other.gameObject.TryGetComponent(out TreeController treeController))
+                    if (other.gameObject.tag == "redBox")
                     {
-                        treeController.state = "well";
+                        other.GetComponent<BoxController>().hit();
                         Destroy(gameObject);
                     }
                 }

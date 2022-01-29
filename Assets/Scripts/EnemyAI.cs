@@ -23,7 +23,7 @@ public class EnemyAI : MonoBehaviour
     private SkillManager skillManager;
     private NavMeshAgent agent;
     private float nextActionStartTime;
-    private IEnumerable<TreeController> trees;
+    //private IEnumerable<TreeController> trees;
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class EnemyAI : MonoBehaviour
         skillManager = GetComponent<SkillManager>();
       //  agent.updateRotation = false;
         nextActionStartTime = Time.time;
-        trees = FindObjectsOfType<TreeController>();
+        //trees = FindObjectsOfType<TreeController>();
     }
 
     private void Update()
@@ -49,20 +49,20 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            SaveTree(trees.FirstOrDefault(tree => tree.state == "burning")?.gameObject);
+            //SaveTree(trees.FirstOrDefault(tree => tree.state == "burning")?.gameObject);
         }
     }
 
     private void LateUpdate()
     {
-        if(trees.Any(tree => tree.state == "burning"))
-        {
-            currentState = EnemyAI.state.SaveTree;
-        }
-        else
-        {
-            currentState = EnemyAI.state.TargetPlayer;
-        }
+        //if(trees.Any(tree => tree.state == "burning"))
+        //{
+         //   currentState = EnemyAI.state.SaveTree;
+        //}
+        //else
+        //{
+         //   currentState = EnemyAI.state.TargetPlayer;
+        //}
     }
 
     void ShootPlayer()
