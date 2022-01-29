@@ -36,7 +36,7 @@ public class ProjectileManager : MonoBehaviour
                     }
                     if (other.gameObject.tag == "Enemy")
                     {
-                        // Decrease enemy health
+                        other.GetComponentInChildren<PlayerHealth>().hit();
                         Destroy(gameObject);
                     }
                 }
