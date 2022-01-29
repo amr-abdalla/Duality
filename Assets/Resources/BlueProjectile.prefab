@@ -109,6 +109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee08f95f4a793c243aaab2e82e62c48d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: blue
+  type: 
   speed: 15
   maxDistance: 15
