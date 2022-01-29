@@ -93,10 +93,11 @@ public class EnemyAI : MonoBehaviour
     {
         agent.destination = agent.transform.position + direction * agent.speed * Time.deltaTime;
 
-        if (agent.transform.position.z < 0.86f)
+      /*  if (agent.transform.position.z < 0.86f)
         {
             agent.Move(new Vector3(0, 0, 0.86f));
         }
+      */
 
         LookAtPlayer();
     }
