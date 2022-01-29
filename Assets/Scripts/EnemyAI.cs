@@ -15,7 +15,8 @@ public class EnemyAI : MonoBehaviour
     private EnemyAI.state currentState = EnemyAI.state.TargetPlayer;
 
     [SerializeField] private Transform playerTransform;
-    [SerializeField] private float MovementAdjustmentRate = 0.5f;
+    [SerializeField] private float maxDistanceToPlayer = 5f;
+    [SerializeField] private float minDistanceToPlayer = 4f;
     [SerializeField] private float maxDelayTime = 0.3f;
     [SerializeField] private float minDelayTime = 0.1f;
 
@@ -28,7 +29,7 @@ public class EnemyAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         skillManager = GetComponent<SkillManager>();
-        agent.updateRotation = false;
+      //  agent.updateRotation = false;
         nextActionStartTime = Time.time;
         trees = FindObjectsOfType<TreeController>();
     }
@@ -66,16 +67,52 @@ public class EnemyAI : MonoBehaviour
 
     void ShootPlayer()
     {
-        float distanceToPlayer = playerTransform.position.x - transform.position.x;
 
-        if (distanceToPlayer.FloatInRange(-MovementAdjustmentRate, MovementAdjustmentRate))
+        float distanceToPlayer = Vector3.Distance(playerTransform.position, transform.position); //playerTransform.position.x - transform.position.x;
+        Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+
+        if (distanceToPlayer > maxDistanceToPlayer)
         {
-            skillManager.TryInvokeSkill(0);
+            MoveToDirection(directionToPlayer);
+            return;
         }
-        else
+
+        if (distanceToPlayer < minDistanceToPlayer)
         {
-            agent.destination = new Vector3(playerTransform.position.x, transform.position.y, transform.position.z);
+            MoveToDirection(-directionToPlayer);
+            return;
         }
+
+        MoveToDirection(RandomVector(-2f, 2f).normalized);
+
+        skillManager.TryInvokeSkill(0);
+
+    }
+
+    private void MoveToDirection(Vector3 direction)
+    {
+        agent.destination = agent.transform.position + direction * agent.speed * Time.deltaTime;
+
+        if (agent.transform.position.z < 0.86f)
+        {
+            agent.Move(new Vector3(0, 0, 0.86f));
+        }
+
+        LookAtPlayer();
+    }
+
+    private void LookAtPlayer()
+    {
+        Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(directionToPlayer), 0.5f);
+    }
+
+    private Vector3 RandomVector(float min, float max)
+    {
+        var x = Random.Range(min, max);
+        var y = 0;
+        var z = Mathf.Clamp(Random.Range(min, max), 0.86f, max);
+        return new Vector3(x, y, z);
     }
 
     void SaveTree(GameObject tree)
