@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: NormalWater
   m_EditorClassIdentifier: 
   name: NormalWater
-  coolDown: 1
+  coolDown: 0
   totalCharges: 1

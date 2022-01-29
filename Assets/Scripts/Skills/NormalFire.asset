@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: NormalFire
   m_EditorClassIdentifier: 
   name: NormalFire
-  coolDown: 2
-  totalCharges: 3
+  coolDown: 0
+  totalCharges: 1
